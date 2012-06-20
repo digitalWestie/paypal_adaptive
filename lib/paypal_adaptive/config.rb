@@ -48,11 +48,13 @@ module PaypalAdaptive
     end
 
     def config_filepath
+      config_file = ENV['PAYPAL_CONFIG_FILE']
+      config_file ||= "paypal_adaptive.yml"
       if defined?(Rails)
-        Rails.root.join("config", "paypal_adaptive.yml")
+        Rails.root.join("config", config_file)
       else
-        File.join(File.dirname(__FILE__), "..", "..", "config", "paypal_adaptive.yml")
-      end
+        File.join(File.dirname(__FILE__), "..", "..", "config", config_file)
+      end    
     end
 
     def retain_requests_for_test?
